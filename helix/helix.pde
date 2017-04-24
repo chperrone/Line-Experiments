@@ -22,5 +22,5 @@ void draw() {
   }
   
   //move time forward
-  t += 1;
+  t += 0.5;
 }
