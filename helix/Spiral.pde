@@ -1,16 +1,18 @@
 public class Spiral {
-  float startX;
-  float startY;
-  float x;
-  float y;
-  color c;
+  float startX; //placement x
+  float startY; //placement y
+  float x;      //x coord
+  float y;      //y coord
+  color c;      //color
   float phase;
+  float speed;
+  
   
   Spiral(float tempStartX, float tempStartY) {
     startX = tempStartX;
     startY = tempStartY;
-    x = tempStartX;
-    y = tempStartY;
+    x = startX;
+    y = startY;
     c = color(random(255), random(255), random(255));
     phase = random(10);
   }
@@ -20,8 +22,10 @@ public class Spiral {
     
     //
     for (int i = 0; i <= NUM_POINTS; i++) {
-      newX(t + i + phase);
-      newY(t + i + phase);
+      float time = t + i + phase;
+      
+      this.x = calcX(time, 2, 10);
+      this.y = calcY(time, 2, 10);
       
       //reset the position of the spiral
       //on every cycle
@@ -45,23 +49,25 @@ public class Spiral {
     }
   }
   
-  // take a time t and calculates that point's x value
-  void newX(float t) {
-    float x = calcX(t);
-    this.x = x + this.startX;
-  }
-
-  void newY(float t) {
-    this.y = calcY(t);
+ 
+  
+  float calcX(float t, float freq, float amp) {
+    float x = sin(t/2) * amp;
+    //x = x + sin(t/4) * 20;
+    x += this.startX;
+    return x;
   }
   
-  float calcX(float t) {
-    return sin(t / 2) * 10; 
+  float calcY(float t, float freq, float amp) {
+    float y = (t + startY);
+    //y += ( + 2) * 100;
+    return y % (height + SCREEN_BUFFERS);
   }
   
-  float calcY(float t) {
-    if (dev_mode) {
-      return (t + startY) % (height + SCREEN_BUFFERS);
-    } else return (t - startY) % (height + SCREEN_BUFFERS);
+  color blink(color c, float t) {
+    float interval = t % 10;
+    if (interval < 10 && interval > 7) {
+      return color(255, 255, 255);
+    } else return c;
   }
 }
