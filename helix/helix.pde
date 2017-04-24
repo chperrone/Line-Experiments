@@ -15,7 +15,7 @@ void setup() {
 }
 
 void draw() {
-  background(20);
+  background(22);
   
   for (int i = 0; i < spirals.length; i++) {
     spirals[i].drawThis();
