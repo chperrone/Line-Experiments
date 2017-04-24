@@ -4,10 +4,11 @@ public class Spiral {
   float x;
   float y;
   
-  Spiral(float tempStartX) {
+  Spiral(float tempStartX, float tempStartY) {
     startX = tempStartX;
-    x = 0;
-    y = 0;
+    startY = tempStartY;
+    x = tempStartX;
+    y = tempStartY;
   }
   
   //x is the starting point on x axis
@@ -17,19 +18,34 @@ public class Spiral {
     stroke(255, 30, 30);
     
     //
-    for (int i = 0; i < NUM_POINTS; i++) {
+    for (int i = 0; i <= NUM_POINTS; i++) {
       newX(t + i);
       newY(t + i);
-      point(this.x + startX, this.y);
+      
+      //reset the position of the spiral
+      //on every cycle
+      if (i == NUM_POINTS) {
+        float new_height = height + SCREEN_BUFFERS;
+        
+        if (this.y > new_height - 1 && this.y < new_height) {
+          this.startX = random(width);
+        }
+      }
+      point(this.x, this.y);
     }
   }
   
   // take a time t and calculates that point's x value
   void newX(float t) {
-    this.x = sin(t / 2) * 10;
+    float x = sin(t / 2) * 10;
+    this.x = x + this.startX;
   }
 
   void newY(float t) {
-    this.y = t % height;
+    if (dev_mode) {
+      this.y = (t + startY) % (height + SCREEN_BUFFERS);
+    } else this.y = (t - startY) % (height + SCREEN_BUFFERS);
+    //if this value equals height - 1
+    //randomize startX
   }
 }
