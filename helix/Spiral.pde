@@ -3,24 +3,25 @@ public class Spiral {
   float startY;
   float x;
   float y;
+  color c;
+  float phase;
   
   Spiral(float tempStartX, float tempStartY) {
     startX = tempStartX;
     startY = tempStartY;
     x = tempStartX;
     y = tempStartY;
+    c = color(random(255), random(255), random(255));
+    phase = random(10);
   }
   
   //x is the starting point on x axis
   public void drawThis() {
-    //colors
-    strokeWeight(3);
-    stroke(255, 30, 30);
     
     //
     for (int i = 0; i <= NUM_POINTS; i++) {
-      newX(t + i);
-      newY(t + i);
+      newX(t + i + phase);
+      newY(t + i + phase);
       
       //reset the position of the spiral
       //on every cycle
@@ -31,21 +32,36 @@ public class Spiral {
           this.startX = random(width);
         }
       }
+      
+      strokeWeight(3);
+      stroke(c);
       point(this.x, this.y);
+      
+      color newColor = color(red(c) + 200,
+                             green(c) + 200,
+                             blue(c) + 200);
+      stroke(newColor);
+      point(this.x, this.y + 8); 
     }
   }
   
   // take a time t and calculates that point's x value
   void newX(float t) {
-    float x = sin(t / 2) * 10;
+    float x = calcX(t);
     this.x = x + this.startX;
   }
 
   void newY(float t) {
+    this.y = calcY(t);
+  }
+  
+  float calcX(float t) {
+    return sin(t / 2) * 10; 
+  }
+  
+  float calcY(float t) {
     if (dev_mode) {
-      this.y = (t + startY) % (height + SCREEN_BUFFERS);
-    } else this.y = (t - startY) % (height + SCREEN_BUFFERS);
-    //if this value equals height - 1
-    //randomize startX
+      return (t + startY) % (height + SCREEN_BUFFERS);
+    } else return (t - startY) % (height + SCREEN_BUFFERS);
   }
 }
