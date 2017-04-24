@@ -7,7 +7,6 @@ public class Spiral {
   float phase;
   float speed;
   
-  
   Spiral(float tempStartX, float tempStartY) {
     startX = tempStartX;
     startY = tempStartY;

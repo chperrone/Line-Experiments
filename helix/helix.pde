@@ -9,7 +9,7 @@ Spiral[] spirals = new Spiral[20];
 
 void setup() {
   size(720, 480);
-  background(200);
+  background(255);
   
   //build list of spirals
   for (int i = 0; i < spirals.length; i++) {
@@ -18,7 +18,7 @@ void setup() {
 }
 
 void draw() {
-  background(200);
+  background(255);
   
   for (int i = 0; i < spirals.length; i++) {
     spirals[i].drawThis();
