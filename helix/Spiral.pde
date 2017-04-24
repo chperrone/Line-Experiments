@@ -6,7 +6,7 @@ public class Spiral {
   
   Spiral(float tempStartX) {
     startX = tempStartX;
-    x = 0;
+    x = tempStartX;
     y = 0;
   }
   

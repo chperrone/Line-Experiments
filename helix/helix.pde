@@ -2,7 +2,7 @@ float t;
 int NUM_POINTS = 50;
 
 //init list
-Spiral[] spirals = new Spiral[10];
+Spiral[] spirals = new Spiral[1];
 
 void setup() {
   background(20);
