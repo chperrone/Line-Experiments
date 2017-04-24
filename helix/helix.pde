@@ -7,7 +7,7 @@ boolean dev_mode = true;
 Spiral[] spirals = new Spiral[5];
 
 void setup() {
-  background(20);
+  background(22);
   size(800, 500);
   
   //build list of spirals
